@@ -1,31 +1,26 @@
-plugins {
-    id("com.android.application")
-    kotlin("android")
-}
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
 
-android {
-    namespace = "com.example.autoreply"
-    compileSdk = 34
-
-    defaultConfig {
-        applicationId = "com.example.autoreply"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+    repositories {
+        google()
+        mavenCentral()
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+    dependencies {
+       classpath("com.android.tools.build:gradle:8.6.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23")
+        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:1.9.23-1.0.20")
+        classpath("com.google.gms:google-services:4.4.2")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.2")
     }
 }
 
-dependencies {
-    implementation("com.google.android.material:material:1.12.0")
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
 }
