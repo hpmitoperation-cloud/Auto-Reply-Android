@@ -35,4 +35,13 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // ✅ Tambahan untuk <PreferenceScreen> dan settings
+    implementation("androidx.preference:preference-ktx:1.2.1")
+
+    // ✅ Tambahan untuk Google Ads (<AdView>, adSize, adUnitId)
+    implementation("com.google.android.gms:play-services-ads:23.3.0")
+
+    // ✅ Tambahan umum (kalau ada coroutine)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }
