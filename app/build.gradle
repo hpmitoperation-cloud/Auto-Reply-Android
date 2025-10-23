@@ -6,7 +6,7 @@ android {
     compileSdkVersion 34
 
     defaultConfig {
-        applicationId "com.example.autoreply"
+        applicationId "com.matrix.autoreply"
         minSdkVersion 24
         targetSdkVersion 34
         versionCode 1
