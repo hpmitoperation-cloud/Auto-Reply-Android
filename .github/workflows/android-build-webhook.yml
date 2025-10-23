@@ -8,31 +8,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
-      - name: Grant permissions
-        run: chmod +x ./gradlew
+    - name: Install Gradle
+      run: sudo apt-get install gradle -y
 
-      - name: Build release APK
-        run: ./gradlew assembleRelease
+    - name: Verify Gradle
+      run: gradle -v
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: AutoReply-Release
-          path: app/build/outputs/apk/release/app-release.apk
+    - name: Build APK
+      run: gradle assembleDebug
 
-      - name: Send build notification to Google Apps Script
-        env:
-          WEBHOOK_URL: ${{ secrets.GAS_WEBHOOK_URL }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{\"nama\":\"Build AutoReply Selesai\",\"nomor\":\"Workflow GitHub\",\"pesan\":\"File APK siap diunduh dari tab Actions.\"}" \
-          "$WEBHOOK_URL"
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-apk
+        path: app/build/outputs/apk/debug/*.apk
+
+    - name: Send webhook to Google Apps Script
+      if: always()
+      run: |
+        curl -X POST -H "Content-Type: application/json" \
+        -d '{"status":"${{ job.status }}","repo":"${{ github.repository }}","run_id":"${{ github.run_id }}"}' \
+        ${{ secrets.GAS_WEBHOOK_URL }}
