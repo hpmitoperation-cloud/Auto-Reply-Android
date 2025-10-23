@@ -17,17 +17,20 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Gradle
-        run: sudo apt-get install gradle -y
+      # 🔧 Generate Gradle Wrapper (karena project kamu belum punya gradlew)
+      - name: Generate Gradle Wrapper
+        run: |
+          gradle wrapper --gradle-version 8.6
+          chmod +x gradlew
 
-      - name: Verify Gradle
-        run: gradle -v
+      - name: Verify Gradle version
+        run: ./gradlew -v
 
       - name: List available Gradle tasks
-        run: gradle tasks
+        run: ./gradlew tasks
 
       - name: Build APK
-        run: gradle :app:assembleDebug
+        run: ./gradlew :app:assembleDebug
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
@@ -39,5 +42,5 @@ jobs:
         if: always()
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"status":"${{ job.status }}","repo":"${{ github.repository }}","run_id":"${{ github.run_id }}"}' \
+          -d "{\"status\":\"${{ job.status }}\",\"repo\":\"${{ github.repository }}\",\"run_id\":\"${{ github.run_id }}\"}" \
           ${{ secrets.GAS_WEBHOOK_URL }}
