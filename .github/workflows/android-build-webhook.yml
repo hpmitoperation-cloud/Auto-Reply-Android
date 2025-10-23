@@ -17,11 +17,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 🔧 Make sure Gradle wrapper is executable & correct version
-      - name: Prepare Gradle Wrapper
+      # 🧰 Generate Gradle Wrapper jika belum ada
+      - name: Generate Gradle Wrapper
         run: |
+          gradle wrapper --gradle-version 8.13
           chmod +x gradlew
-          ./gradlew wrapper --gradle-version 8.13
 
       - name: Verify Gradle version
         run: ./gradlew -v
