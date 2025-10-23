@@ -6,5 +6,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Autoreply"
+rootProject.name = "Auto-Reply-Android"
 include(":app")
