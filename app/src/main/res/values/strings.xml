@@ -246,4 +246,7 @@
     <string name="smart_replies">Smart Replies</string>
     <string name="configure_smart_replies">Configure Smart Replies</string>
     <string name="ai_powered_replies">AI-powered replies</string>
+    <string name="ai_settings_banner">AI Settings Banner</string>
+    <string name="msg_logs_banner">Message Logs Banner</string>
+    <string name="main_banner">Main Banner</string>
 </resources>
