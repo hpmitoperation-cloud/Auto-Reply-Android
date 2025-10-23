@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.autoreply"
+    namespace = "com.matrix.autoreply"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.autoreply"
+        applicationId = "com.matrix.autoreply"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
