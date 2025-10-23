@@ -24,7 +24,11 @@ jobs:
       run: gradle -v
 
     - name: Build APK
-      run: gradle assembleDebug
+      run: gradle :app:assembleDebug
+    
+    - name: List available Gradle tasks
+    run: gradle tasks
+
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
