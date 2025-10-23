@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew tasks
 
       - name: Build APK
-        run: ./gradlew :app:assembleDebug
+        run: ./gradlew :app:assembleDebug --warning-mode=none
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
